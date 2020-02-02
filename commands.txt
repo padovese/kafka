@@ -1,0 +1,41 @@
+inside the container:
+
+- create a topic
+kafka-topics.sh --zookeeper zookeeper:2181 --topic first_topic --create --partitions 3 --replication-factor 1
+
+- list it
+kafka-topics.sh --zookeeper zookeeper:2181 --list
+
+- describe it
+kafka-topics.sh --zookeeper zookeeper:2181 --topic first_topic --describe
+
+- delete it
+kafka-topics.sh --zookeeper zookeeper:2181 --topic second_topic --delete
+
+- produce
+kafka-console-producer.sh --broker-list kafka:9092 --topic first_topic
+
+- setting up acks
+kafka-console-producer.sh --broker-list kafka:9092 --topic first_topic --producer-property acks=all
+
+- consume (listening only new messages)
+kafka-console-consumer.sh --bootstrap-server kafka:9092 --topic first_topic
+
+- consume (all data)
+kafka-console-consumer.sh --bootstrap-server kafka:9092 --topic first_topic --from-beginning
+
+- consume in group, you can have multiple consumers and when one reads, other does not. Good fo scalability. It also tracks the messages the group already read, and get all the messages the grouṕ didn't read yet in case of consumer down. Yet, it read twice for two different groups for example.
+- kafka-console-consumer.sh --bootstrap-server kafka:9092 --topic first_topic --group someapp 
+
+- list all groups
+kafka-consumer-groups.sh --bootstrap-server kafka:9092 --list
+
+- describe consumer statics
+kafka-consumer-groups.sh --bootstrap-server kafka:9092 --describe --group someapp
+
+- reset the state of offsets you already read. The next time you consume, it is bring all again
+kafka-consumer-groups.sh --bootstrap-server kafka:9092 --group someapp --reset-offsets --to-earliest --execute --topic first_topic
+
+- produce and consume in a key-value style:
+kafka-console-producer.sh --broker-list kafka:9092 --topic first_topic --property parse.key=true --property key.separator=,
+kafka-console-consumer.sh --bootstrap-server kafka:9092 --topic first_topic --from-beginning --property print.key=true --property key.separator=,
