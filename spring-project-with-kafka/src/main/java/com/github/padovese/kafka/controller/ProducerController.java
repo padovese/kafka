@@ -22,7 +22,7 @@ public class ProducerController {
     @GetMapping("/{prefix}/{rep}")
     public String produce(@PathVariable(name = "prefix") String prefix, @PathVariable(name = "rep") int rep){
         for(int rept = rep; rept > 0; rept--){
-            sendMessage(new SomeEntity(rep, prefix));
+            sendMessage(new SomeEntity(rept, prefix));
         }
         return "ok";
     }

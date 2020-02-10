@@ -12,6 +12,7 @@ public class SomeEntity {
     private int id;
     private String name;
 
+    public SomeEntity(){}
 
     public SomeEntity(int id, String name) {
         this.id = id;
@@ -34,5 +35,11 @@ public class SomeEntity {
         this.name = name;
     }
 
-
+    @Override
+    public String toString() {
+        return "SomeEntity{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }
