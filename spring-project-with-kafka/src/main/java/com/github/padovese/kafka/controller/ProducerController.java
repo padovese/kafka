@@ -1,5 +1,6 @@
 package com.github.padovese.kafka.controller;
 
+import com.github.padovese.kafka.model.SomeEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Controller;
@@ -16,17 +17,23 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProducerController {
 
     @Autowired
-    private KafkaTemplate<String, String> kafkaTemplate;
+    private KafkaTemplate<String, SomeEntity> kafkaTemplate;
 
     @GetMapping("/{prefix}/{rep}")
     public String produce(@PathVariable(name = "prefix") String prefix, @PathVariable(name = "rep") int rep){
         for(int rept = rep; rept > 0; rept--){
-            sendMessage(prefix + rept);
+            sendMessage(new SomeEntity(rep, prefix));
         }
         return "ok";
     }
 
-    public void sendMessage(String msg) {
-        kafkaTemplate.send("first_topic", msg);
+//    To produce simple string messages
+//    public void sendMessage(String msg) {
+//        kafkaTemplate.send("first_topic", msg);
+//    }
+
+//  To produce json
+    public void sendMessage(SomeEntity obj) {
+        kafkaTemplate.send("first_topic", obj);
     }
 }
