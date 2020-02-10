@@ -1,10 +1,8 @@
 package com.github.padovese.kafka.controller;
 
 import com.github.padovese.kafka.config.KafkaConfig;
-import org.apache.kafka.clients.producer.Callback;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
-import org.apache.kafka.clients.producer.RecordMetadata;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-public class HomeController {
+public class ProducerController {
 
     @Autowired
     private KafkaConfig kafkaConfig;
 
-    private final Logger logger = LoggerFactory.getLogger(HomeController.class);
+    private final Logger logger = LoggerFactory.getLogger(ProducerController.class);
 
     @GetMapping("/{prefix}/{rep}")
     public String simpleProducer(@PathVariable(name = "prefix") String prefix, @PathVariable(name = "rep") int rep) throws InterruptedException {
