@@ -1,7 +1,9 @@
 # Kafka with pure Java or with SpringBoot
-This project summarize how to use kafka and zookeeper inside a two different containers, using bitami images, and to make a simple java application to produce and other to consume the kafka's topics.
+This project summarize how to use kafka and zookeeper inside two different containers, using bitnami images, and to make a simple java application to produce and other to consume the kafka's topics.
 
-<center><img src="arq.jpg" width="50%"></center>
+<p align="center">
+    <img src="arq.jpg" width="50%">
+</p>
 
 You can also see the difference between apache.kafka lib and springframework.kafka lib.
 
